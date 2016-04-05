@@ -125,6 +125,7 @@ public class SendAndGetDataActivity extends AppCompatActivity {
     void beginListenForData() {
         final Handler handler = new Handler();
         final byte delimiter = 10; //This is the ASCII code for a newline character
+        final byte letterE = 69; //This is the ASCII code for the E character
 
         stopListeningThread = false;
         readBufferPosition = 0;
@@ -150,6 +151,9 @@ public class SendAndGetDataActivity extends AppCompatActivity {
                                             label.setText(data);
                                         }
                                     });
+                                }
+                                else if (b == letterE){
+                                    Log.d(TAG, "The letter E was received.");
                                 }
                                 else {
                                     readBuffer[readBufferPosition++] = b;

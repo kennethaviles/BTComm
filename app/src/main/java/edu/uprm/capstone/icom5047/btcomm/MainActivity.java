@@ -179,10 +179,14 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         startActivity(intent);
     }
 
-    public void onClick(View view){
-        Intent intent = new Intent(this, DelayedMessageService.class);
-        intent.putExtra("message", getResources().getString(R.string.button_response));
-        startService(intent);
+    public void onClickButton(View view){
+        //For the Delayed message
+//        Intent intent = new Intent(this, DelayedMessageService.class);
+//        intent.putExtra("message", getResources().getString(R.string.button_response));
+//        startService(intent);
+
+        Intent intent = new Intent(this, CallCaregiverActivity.class);
+        startActivity(intent);
     }
 
 //    private class DrawerItemClickListener implements ListView.OnItemClickListener{
