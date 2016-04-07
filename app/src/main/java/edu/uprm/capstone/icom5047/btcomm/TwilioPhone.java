@@ -69,6 +69,7 @@ public class TwilioPhone implements Twilio.InitListener
         if(connection != null){
             connection.disconnect();
             connection = null;
+            Log.d(TAG, "Disconnected connection.");
         }
     }
     
@@ -93,7 +94,8 @@ public class TwilioPhone implements Twilio.InitListener
     }
 
     protected void setCapabilityToken(String capabilityToken){
-    	 device = Twilio.createDevice(capabilityToken, null /* DeviceListener */);
+    	device = Twilio.createDevice(capabilityToken, null /* DeviceListener */);
+        Log.d(TAG, "The device was created.");
     }
     
     /* Twilio.InitListener method */
