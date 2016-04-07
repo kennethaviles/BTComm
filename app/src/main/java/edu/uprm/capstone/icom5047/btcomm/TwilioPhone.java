@@ -15,17 +15,21 @@ import com.twilio.client.Connection;
 import com.twilio.client.Device;
 import com.twilio.client.Twilio;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MonkeyPhone implements Twilio.InitListener
+public class TwilioPhone implements Twilio.InitListener
 {
-    private static final String TAG = "MonkeyPhone";
+    private static final String TAG = "TwilioPhone";
 
     private Device device;
     private Connection connection;
 
-    public MonkeyPhone(Context context)
+    public TwilioPhone(Context context)
     {
         Twilio.initialize(context, this /* Twilio.InitListener */);
     }
@@ -40,11 +44,22 @@ public class MonkeyPhone implements Twilio.InitListener
     }
 
     public void connect(String phoneNumber){
-        Map<String, String> parameters = new HashMap<String, String>();
-        parameters.put("To", phoneNumber);
-        connection = device.connect(parameters, null);
-        if(connection == null){
-            Log.w(TAG, "Failed to create new connection.");
+
+        try {
+            Map<String, String> parameters = new HashMap<String, String>();
+            parameters.put("To", phoneNumber);
+            JSONObject obj = new JSONObject();
+            obj.put("1", "+17875430767");
+            obj.put("2","+17874789475");
+            obj.put("3", "+17876927295");
+            parameters.put("Numbers", obj.toString());
+            connection = device.connect(parameters, null);
+            if(connection == null){
+                Log.w(TAG, "Failed to create new connection.");
+            }
+        }
+        catch (JSONException e){
+            Log.d(TAG, e.toString());
         }
     }
 
@@ -71,7 +86,7 @@ public class MonkeyPhone implements Twilio.InitListener
     	
 		@Override
 		protected void onPostExecute(String capabilityToken ){
-			MonkeyPhone.this.setCapabilityToken(capabilityToken);
+            TwilioPhone.this.setCapabilityToken(capabilityToken);
 		}
     }
 

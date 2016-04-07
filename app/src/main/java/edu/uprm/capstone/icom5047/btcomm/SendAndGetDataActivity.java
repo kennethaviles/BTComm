@@ -37,7 +37,7 @@ public class SendAndGetDataActivity extends AppCompatActivity {
 
     byte[] readBuffer;
     int readBufferPosition;
-    int counter;
+    int counter = 0;
     volatile boolean stopListeningThread;
 
     @Override
@@ -153,7 +153,13 @@ public class SendAndGetDataActivity extends AppCompatActivity {
                                     });
                                 }
                                 else if (b == letterE){
-                                    Log.d(TAG, "The letter E was received.");
+                                    counter = counter + 1;
+                                    Log.d(TAG, "The letter E was received. Time: " + counter);
+                                    handler.post(new Runnable() {
+                                        public void run() {
+                                            label.setText("The letter E was received."+ counter);
+                                        }
+                                    });
                                 }
                                 else {
                                     readBuffer[readBufferPosition++] = b;
@@ -175,6 +181,17 @@ public class SendAndGetDataActivity extends AppCompatActivity {
     void sendDataToBT() {
         try {
             String message = entryTextBox.getText().toString();
+            message += "\n";
+            output.write(message.getBytes());
+            label.setText(R.string.sent);
+        }catch (IOException e){
+            Log.e(TAG, e.toString());
+        }
+    }
+
+    void sendDataToBT(String msg) {
+        try {
+            String message = msg ;
             message += "\n";
             output.write(message.getBytes());
             label.setText(R.string.sent);

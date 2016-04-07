@@ -15,7 +15,7 @@ import android.widget.ImageButton;
 
 public class CallCaregiverActivity extends Activity implements View.OnClickListener
 {
-    private MonkeyPhone phone;
+    private TwilioPhone phone;
     private EditText numberField;
 
     @Override
@@ -24,7 +24,7 @@ public class CallCaregiverActivity extends Activity implements View.OnClickListe
         super.onCreate(bundle);
         setContentView(R.layout.main_twilio);
 
-        phone = new MonkeyPhone(getApplicationContext());
+        phone = new TwilioPhone(getApplicationContext());
 
         ImageButton dialButton = (ImageButton)findViewById(R.id.dialButton);
         dialButton.setOnClickListener(this);
