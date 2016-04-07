@@ -31,7 +31,9 @@ public class TwilioPhone implements Twilio.InitListener
 
     public TwilioPhone(Context context)
     {
-        Twilio.initialize(context, this /* Twilio.InitListener */);
+        if(!Twilio.isInitialized()){
+            Twilio.initialize(context, this /* Twilio.InitListener */);
+        }
     }
 
     /* Twilio.InitListener method */
