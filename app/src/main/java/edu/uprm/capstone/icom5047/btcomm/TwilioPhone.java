@@ -49,7 +49,9 @@ public class TwilioPhone implements Twilio.InitListener
 
         try {
             Map<String, String> parameters = new HashMap<String, String>();
+            Log.d(TAG, "Phonenumber: "+phoneNumber);
             parameters.put("To", phoneNumber);
+            //parameters.put("IfMachine", "Continue");
             JSONObject obj = new JSONObject();
             obj.put("1", "+17875430767");
             obj.put("2","+17874789475");
